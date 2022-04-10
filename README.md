@@ -6,18 +6,20 @@ Modul 02 - Analysis Data using R
 
 Modul 03 - Introduction to Descriptive Analytics
 
-Modul 04 - Business Analytics Process and Data Exploration
+Modul 04 - Business Analytics Process and Data Exploration - 1
 
-Modul 05 - Classification
+Modul 05 - Business Analytics Process and Data Exploration - 2
 
-Modul 06 - Clustering
+Modul 06 - Classification
 
-Modul 07 - Association Rule
+Modul 07 - Clustering
 
-Modul 08 - Simple Linear Regression
+Modul 08 - Association Rule
 
-Modul 09 - Multiple Linear Regression
+Modul 09 - Simple Linear Regression
 
-Modul 10 - Regresi Logistik
+Modul 10 - Multiple Linear Regression
 
-Modul 11 - Analisis Big Data
+Modul 11 - Regresi Logistik
+
+Modul 12 - Analisis Big Data
