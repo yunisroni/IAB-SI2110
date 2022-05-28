@@ -1,0 +1,140 @@
+---
+title: "Modul 08 - Simple Linear Regression"
+author: "Roni Yunis"
+date: "05/30/2022"
+output: pdf_document
+---
+
+# Pengantar
+Regresi liner sederhana menggambarkan hubungan liner antara dua variabel, yaitu variabel independen (x) dan variabel dependen (y). 
+$y = b0 + b1*x$
+
+Nilai $b$ disebut dengan bobot regresi (koefisien beta), digunakan untuk mengukur hubungan antara variabel prediktor dan hasil
+
+
+# Load Packages
+```{r}
+#Split dataset 
+library (caTools)
+#Predicting result visualization
+library(ggplot2)
+#Import dataset marketing pada library datarium
+library(datarium)
+
+```
+
+# View dataset
+```{r}
+head(marketing)
+```
+
+Melihat dimensi dari data, dengan menggunakan fungsi dim()
+```{r}
+dim(marketing)
+```
+Melihat struktur dari data, dengan menggunakan fungsi str()
+```{r}
+str(marketing)
+```
+
+# Exploratory Data Analysis
+
+```{r}
+summary(marketing)
+```
+```{r}
+cor(marketing)
+```
+
+Sekarang kita akan mencoba melihat korelasi antara facebook dengan sales
+
+```{r}
+#menghitung korelasi antar variabel
+korfacebook <- cor(marketing$facebook, marketing$sales)
+korfacebook
+```
+Koefisien korelasi mengukur tingkat hubungan antara dua variabel x dan y. Nilainya berkisar antara -1 (korelasi negatif sempurna: ketika x meningkat, y menurun) dan +1 (korelasi positif sempurna: ketika x meningkat, y meningkat).
+
+Nilai yang mendekati 0 menunjukkan hubungan yang lemah antara variabel. Korelasi yang rendah (-0,2 <x <0,2) mungkin menunjukkan bahwa banyak variasi dari variabel hasil (y) tidak dijelaskan oleh prediktor (x). Dalam kasus seperti itu, kita mungkin harus mencari variabel prediktor yang lebih baik.
+
+Dalam contoh ini, koefisien korelasinya antara variabel facebook dan sales adalah sebesar 0,57
+
+# Bagi dataset kedalam data training dan data testing
+```{r}
+splitdata <- sample.split(marketing$sales, SplitRatio = 0.7)
+trainingset <- subset(marketing, splitdata == TRUE)
+testingset <- subset(marketing, splitdata == FALSE)
+```
+
+```{r}
+dim(trainingset)
+dim(testingset)
+```
+
+Bisa dilihat bahwa untuk data training ada 140 baris data, dan untuk data testing ada 60 baris data
+
+
+# Model Regresi Sederhana
+## liner regresi sederhana pada data training
+```{r}
+lm.r <- lm(sales ~ facebook,
+           data = trainingset)
+summary(lm.r)
+```
+Berdasarkan output diatas bisa dijelaskan bahwa:
+Persamaan regresi linernya adalah $sales = 11.41 + 0.192*facebook$
+
+Misal facebook = 3500
+```{r}
+sales = 10.85 + 0.216*3500
+sales
+```
+
+
+Kalau kita lihat dari model diatas bahwa facebook punya hubungan signifikan terhadap penjualan, artinya nilai penjualan dapat ditingkatkan dari anggaran iklan pada facebook. 
+
+
+## Prediksi model regresi dengan data testing
+```{r}
+yprediksi <- predict(lm.r, newdata = testingset)
+head(yprediksi)
+```
+
+## Visualasi hasil data training
+```{r}
+ggplot() + geom_point(aes(x = trainingset$facebook,
+                          y = trainingset$sales), colour = 'red') +
+  geom_line(aes(x = trainingset$facebook,
+                y = predict(lm.r, newdata = trainingset)), colour = 'blue') +
+  ggtitle('Pengaruh Facebook terhadap Sales (Data Training)') +
+  xlab('facebook') +
+  ylab('sales')
+```
+
+## Visualasi hasil data testing
+```{r}
+ggplot() + geom_point(aes(x = testingset$facebook,
+                          y = testingset$sales), colour = 'red') +
+  geom_line(aes(x = testingset$facebook,
+                y = predict(lm.r, newdata = testingset)), colour = 'blue') +
+  ggtitle('Pengaruh Facebook terhadap Sales (Data Testing)') +
+  xlab('Facebook') +
+  ylab('Sales')
+```
+# Latihan
+BUatlah model regresi untuk hubungan variabel `youtube` terhadap variabel `sales`
+```{r}
+# your code
+
+```
+
+
+Buatlah model regresi untuk hubungan varibel `newspaper` terhadap variabel `sales`
+```{r}
+# your code
+
+
+```
+
+
+
