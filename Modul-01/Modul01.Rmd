@@ -32,7 +32,7 @@ knitr::include_graphics(path = "image/RTools.png")
 
 # Alternatif R Editor/Platform
 
-- rstudio.cloud : https://rstudio.cloud
+- rstudio.cloud : https://posit.cloud
 - kaggle.com : https://kaggle.com
 - yupiter (anaconda) : https://www.anaconda.com/products/individual (harus di install pada laptop)
 
